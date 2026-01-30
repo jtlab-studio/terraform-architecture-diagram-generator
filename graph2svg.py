@@ -732,15 +732,15 @@ def svg_arrow(from_pos: Position, to_pos: Position) -> str:
 
 
 def svg_user_arrow(user_pos: Position, target_pos: Position, offset: int = 0) -> str:
-    """Draw curved arrow from user to entry point."""
+    """Draw curved line from user to entry point (no arrowhead)."""
     x1 = user_pos.right
     y1 = user_pos.cy + offset
     x2 = target_pos.left - ARROW_GAP
     y2 = target_pos.cy
     
-    # Bezier curve with end marker
+    # Bezier curve, no marker
     ctrl_x = x1 + 24
-    return f'  <path d="M{x1},{y1} C{ctrl_x},{y1} {ctrl_x},{y2} {x2},{y2}" fill="none" stroke="{COLORS["arrow"]}" stroke-width="1.5" marker-end="url(#arrow)"/>'
+    return f'  <path d="M{x1},{y1} C{ctrl_x},{y1} {ctrl_x},{y2} {x2},{y2}" fill="none" stroke="{COLORS["arrow"]}" stroke-width="1.5"/>'
 
 
 def svg_cross_module_arrow(from_pos: Position, to_pos: Position) -> str:
