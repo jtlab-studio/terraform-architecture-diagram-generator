@@ -1,0 +1,248 @@
+{
+  "resources": [
+    {
+      "address": "module.visitor_counter.aws_cloudwatch_log_group.lambda",
+      "type": "aws_cloudwatch_log_group",
+      "name": "lambda",
+      "module": "visitor_counter",
+      "label": "ElasticPurple",
+      "attributes": {
+        "name": "/aws/lambda/cloudresume-counter-api",
+        "tags_all": {
+          "Component": "Monitoring",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Monitoring",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        }
+      }
+    },
+    {
+      "address": "module.visitor_counter.aws_dynamodb_table.counter",
+      "type": "aws_dynamodb_table",
+      "name": "counter",
+      "module": "visitor_counter",
+      "label": "ElasticPurple",
+      "attributes": {
+        "name": "cloudresume",
+        "tags_all": {
+          "Component": "Database",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Database",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        }
+      }
+    },
+    {
+      "address": "module.visitor_counter.aws_iam_role.lambda_execution",
+      "type": "aws_iam_role",
+      "name": "lambda_execution",
+      "module": "visitor_counter",
+      "label": "ElasticPurple",
+      "attributes": {
+        "name": "cloudresume-counter-api-role-zx11hw1x",
+        "tags_all": {
+          "Component": "IAM",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "IAM",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "description": ""
+      }
+    },
+    {
+      "address": "module.visitor_counter.aws_lambda_function.counter",
+      "type": "aws_lambda_function",
+      "name": "counter",
+      "module": "visitor_counter",
+      "label": "ElasticPurple",
+      "attributes": {
+        "function_name": "cloudresume-counter-api",
+        "tags_all": {
+          "Component": "Compute",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Compute",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "description": ""
+      }
+    },
+    {
+      "address": "module.visitor_counter.aws_lambda_function_url.counter",
+      "type": "aws_lambda_function_url",
+      "name": "counter",
+      "module": "visitor_counter",
+      "label": "cloudresume-counter-api",
+      "attributes": {
+        "function_name": "cloudresume-counter-api"
+      }
+    },
+    {
+      "address": "module.website_frontend.aws_acm_certificate.website",
+      "type": "aws_acm_certificate",
+      "name": "website",
+      "module": "website_frontend",
+      "label": "ElasticPurple",
+      "attributes": {
+        "tags_all": {
+          "Component": "Security",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Security",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "domain_name": "elasticpurple.com"
+      }
+    },
+    {
+      "address": "module.website_frontend.aws_cloudfront_distribution.website",
+      "type": "aws_cloudfront_distribution",
+      "name": "website",
+      "module": "website_frontend",
+      "label": "ElasticPurple",
+      "attributes": {
+        "tags_all": {
+          "Component": "CDN",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "CDN",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "domain_name": "d1vyjf65raehbn.cloudfront.net"
+      }
+    },
+    {
+      "address": "module.website_frontend.aws_route53_zone.main",
+      "type": "aws_route53_zone",
+      "name": "main",
+      "module": "website_frontend",
+      "label": "ElasticPurple",
+      "attributes": {
+        "name": "elasticpurple.com",
+        "tags_all": {
+          "Component": "DNS",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "DNS",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        }
+      }
+    },
+    {
+      "address": "module.website_frontend.aws_s3_bucket.website",
+      "type": "aws_s3_bucket",
+      "name": "website",
+      "module": "website_frontend",
+      "label": "ElasticPurple",
+      "attributes": {
+        "bucket": "elastic-purple-website-s3-bucket",
+        "tags_all": {
+          "Component": "Storage",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Storage",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        }
+      }
+    },
+    {
+      "address": "module.website_frontend.aws_wafv2_web_acl.cloudfront_protection[0]",
+      "type": "aws_wafv2_web_acl",
+      "name": "cloudfront_protection",
+      "module": "website_frontend",
+      "label": "ElasticPurple",
+      "attributes": {
+        "name": "CreatedByCloudFront-72254336",
+        "tags_all": {
+          "Component": "Security",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "tags": {
+          "Component": "Security",
+          "ManagedBy": "Terraform",
+          "Name": "ElasticPurple",
+          "Project": "Cloud Resume Challenge"
+        },
+        "description": "Web ACL for CloudFront distribution"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "module.visitor_counter.aws_lambda_function.counter",
+      "to": "module.visitor_counter.aws_dynamodb_table.counter",
+      "inferred": true
+    },
+    {
+      "from": "module.website_frontend.aws_cloudfront_distribution.website",
+      "to": "module.website_frontend.aws_s3_bucket.website",
+      "inferred": true
+    }
+  ],
+  "modules": [
+    "visitor_counter",
+    "website_frontend"
+  ],
+  "_meta": {
+    "resource_count": 10,
+    "dependency_count": 2,
+    "module_count": 2,
+    "resource_types": [
+      "aws_acm_certificate",
+      "aws_cloudfront_distribution",
+      "aws_cloudwatch_log_group",
+      "aws_dynamodb_table",
+      "aws_iam_role",
+      "aws_lambda_function",
+      "aws_lambda_function_url",
+      "aws_route53_zone",
+      "aws_s3_bucket",
+      "aws_wafv2_web_acl"
+    ]
+  }
+}
