@@ -1,0 +1,58 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  subgraph "cluster_module.visitor_counter" {
+    label = "module.visitor_counter"
+    fontname = "sans-serif"
+    "module.visitor_counter.aws_cloudwatch_log_group.lambda" [label="aws_cloudwatch_log_group.lambda"];
+    "module.visitor_counter.aws_dynamodb_table.counter" [label="aws_dynamodb_table.counter"];
+    "module.visitor_counter.aws_iam_role.lambda_execution" [label="aws_iam_role.lambda_execution"];
+    "module.visitor_counter.aws_iam_role_policy.lambda_dynamodb" [label="aws_iam_role_policy.lambda_dynamodb"];
+    "module.visitor_counter.aws_iam_role_policy_attachment.lambda_dynamodb_full" [label="aws_iam_role_policy_attachment.lambda_dynamodb_full"];
+    "module.visitor_counter.aws_iam_role_policy_attachment.lambda_logs" [label="aws_iam_role_policy_attachment.lambda_logs"];
+    "module.visitor_counter.aws_lambda_function.counter" [label="aws_lambda_function.counter"];
+    "module.visitor_counter.aws_lambda_function_url.counter" [label="aws_lambda_function_url.counter"];
+  }
+  subgraph "cluster_module.website_frontend" {
+    label = "module.website_frontend"
+    fontname = "sans-serif"
+    "module.website_frontend.aws_acm_certificate.website" [label="aws_acm_certificate.website"];
+    "module.website_frontend.aws_acm_certificate_validation.website" [label="aws_acm_certificate_validation.website"];
+    "module.website_frontend.aws_cloudfront_distribution.website" [label="aws_cloudfront_distribution.website"];
+    "module.website_frontend.aws_cloudfront_origin_access_control.website" [label="aws_cloudfront_origin_access_control.website"];
+    "module.website_frontend.aws_route53_record.apex" [label="aws_route53_record.apex"];
+    "module.website_frontend.aws_route53_record.cert_validation" [label="aws_route53_record.cert_validation"];
+    "module.website_frontend.aws_route53_record.www" [label="aws_route53_record.www"];
+    "module.website_frontend.aws_route53_zone.main" [label="aws_route53_zone.main"];
+    "module.website_frontend.aws_s3_bucket.website" [label="aws_s3_bucket.website"];
+    "module.website_frontend.aws_s3_bucket_policy.website" [label="aws_s3_bucket_policy.website"];
+    "module.website_frontend.aws_s3_bucket_public_access_block.website" [label="aws_s3_bucket_public_access_block.website"];
+    "module.website_frontend.aws_s3_bucket_server_side_encryption_configuration.website" [label="aws_s3_bucket_server_side_encryption_configuration.website"];
+    "module.website_frontend.aws_s3_bucket_versioning.website" [label="aws_s3_bucket_versioning.website"];
+    "module.website_frontend.aws_s3_bucket_website_configuration.website" [label="aws_s3_bucket_website_configuration.website"];
+    "module.website_frontend.aws_wafv2_web_acl.cloudfront_protection" [label="aws_wafv2_web_acl.cloudfront_protection"];
+  }
+  "module.visitor_counter.aws_iam_role_policy.lambda_dynamodb" -> "module.visitor_counter.aws_dynamodb_table.counter";
+  "module.visitor_counter.aws_iam_role_policy.lambda_dynamodb" -> "module.visitor_counter.aws_iam_role.lambda_execution";
+  "module.visitor_counter.aws_iam_role_policy_attachment.lambda_dynamodb_full" -> "module.visitor_counter.aws_iam_role.lambda_execution";
+  "module.visitor_counter.aws_iam_role_policy_attachment.lambda_logs" -> "module.visitor_counter.aws_iam_role.lambda_execution";
+  "module.visitor_counter.aws_lambda_function.counter" -> "module.visitor_counter.aws_dynamodb_table.counter";
+  "module.visitor_counter.aws_lambda_function.counter" -> "module.visitor_counter.aws_iam_role.lambda_execution";
+  "module.visitor_counter.aws_lambda_function_url.counter" -> "module.visitor_counter.aws_lambda_function.counter";
+  "module.website_frontend.aws_acm_certificate_validation.website" -> "module.website_frontend.aws_route53_record.cert_validation";
+  "module.website_frontend.aws_cloudfront_distribution.website" -> "module.website_frontend.aws_acm_certificate.website";
+  "module.website_frontend.aws_cloudfront_distribution.website" -> "module.website_frontend.aws_cloudfront_origin_access_control.website";
+  "module.website_frontend.aws_cloudfront_distribution.website" -> "module.website_frontend.aws_s3_bucket.website";
+  "module.website_frontend.aws_cloudfront_distribution.website" -> "module.website_frontend.aws_wafv2_web_acl.cloudfront_protection";
+  "module.website_frontend.aws_route53_record.apex" -> "module.website_frontend.aws_cloudfront_distribution.website";
+  "module.website_frontend.aws_route53_record.apex" -> "module.website_frontend.aws_route53_zone.main";
+  "module.website_frontend.aws_route53_record.cert_validation" -> "module.website_frontend.aws_acm_certificate.website";
+  "module.website_frontend.aws_route53_record.cert_validation" -> "module.website_frontend.aws_route53_zone.main";
+  "module.website_frontend.aws_route53_record.www" -> "module.website_frontend.aws_cloudfront_distribution.website";
+  "module.website_frontend.aws_route53_record.www" -> "module.website_frontend.aws_route53_zone.main";
+  "module.website_frontend.aws_s3_bucket_policy.website" -> "module.website_frontend.aws_cloudfront_distribution.website";
+  "module.website_frontend.aws_s3_bucket_public_access_block.website" -> "module.website_frontend.aws_s3_bucket.website";
+  "module.website_frontend.aws_s3_bucket_server_side_encryption_configuration.website" -> "module.website_frontend.aws_s3_bucket.website";
+  "module.website_frontend.aws_s3_bucket_versioning.website" -> "module.website_frontend.aws_s3_bucket.website";
+  "module.website_frontend.aws_s3_bucket_website_configuration.website" -> "module.website_frontend.aws_s3_bucket.website";
+}
