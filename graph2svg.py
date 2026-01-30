@@ -656,6 +656,9 @@ def svg_defs() -> str:
     <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="{COLORS['arrow']}"/>
     </marker>
+    <marker id="arrow-mid" markerWidth="10" markerHeight="8" refX="5" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="{COLORS['arrow']}"/>
+    </marker>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/>
     </filter>
@@ -735,28 +738,30 @@ def svg_user_arrow(user_pos: Position, target_pos: Position, offset: int = 0) ->
     x2 = target_pos.left - ARROW_GAP
     y2 = target_pos.cy
     
-    # Bezier curve
+    # Bezier curve with end marker
     ctrl_x = x1 + 24
     return f'  <path d="M{x1},{y1} C{ctrl_x},{y1} {ctrl_x},{y2} {x2},{y2}" fill="none" stroke="{COLORS["arrow"]}" stroke-width="1.5" marker-end="url(#arrow)"/>'
 
 
 def svg_cross_module_arrow(from_pos: Position, to_pos: Position) -> str:
-    """Draw dashed curved arrow for cross-module connections (e.g., website calling API)."""
+    """Draw dashed curved line for cross-module API calls.
+    
+    Uses dashed style to indicate bidirectional request/response flow.
+    No arrowheads - the connection itself shows the relationship.
+    """
     x1 = from_pos.cx
     y1 = from_pos.y + from_pos.h + ARROW_GAP
     x2 = to_pos.cx
     y2 = to_pos.y - ARROW_GAP
     
-    # Vertical with curve
-    mid_y = (y1 + y2) // 2
-    
-    # If going up (from lower module to upper), adjust
+    # If caller is below callee, flip the connection points
     if y1 > y2:
         y1 = from_pos.y - ARROW_GAP
         y2 = to_pos.y + to_pos.h + ARROW_GAP
-        mid_y = (y1 + y2) // 2
     
-    return f'  <path d="M{x1},{y1} C{x1},{mid_y} {x2},{mid_y} {x2},{y2}" fill="none" stroke="{COLORS["arrow"]}" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>'
+    mid_y = (y1 + y2) // 2
+    
+    return f'  <path d="M{x1},{y1} C{x1},{mid_y} {x2},{mid_y} {x2},{y2}" fill="none" stroke="{COLORS["arrow"]}" stroke-width="1.5" stroke-dasharray="4,3"/>'
 
 
 def svg_user(pos: Position) -> str:
